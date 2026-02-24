@@ -1,0 +1,40 @@
+.DS_Store
+._*
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# ---- Airflow ----
+logs/
+airflow-webserver.pid
+*.log
+
+# ---- Data files ----
+data/staging/
+data/processed/
+data/tmp/
+*.parquet
+data/raw/
+
+# ---- Docker ----
+**/.docker/
+*.pid
+
+# ---- Secrets / env ----
+.env
+.env.*
+*.pem
+*.key
+*.crt
