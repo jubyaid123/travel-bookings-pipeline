@@ -2,22 +2,44 @@
 
 An end-to-end ETL pipeline orchestrated with Apache Airflow and Docker Compose. The DAG extracts raw hotel booking data, transforms and validates it, then loads an analytics-ready fact table into PostgreSQL.
 
-## Tech Stack
-- Apache Airflow (DAG orchestration)
-- Docker Compose (local environment)
-- PostgreSQL (analytics database)
-- Python (Pandas/NumPy) for transformations and validation
+**Results (current dataset):**
+- Rows loaded: **119,390**
+- Arrival date range: **2015-07-01 → 2017-08-31**
+- Cancellation rate: **37.04%**
+  
+---
 
-## Pipelinen`  
-- Password: `admin`
+## Tech Stack
+- **Airflow**: orchestration (`bookings_etl` DAG)
+- **Docker Compose**: local environment
+- **PostgreSQL**: analytics database (`bookings-postgres`)
+- **Python / Pandas**: transformations + validation
+
+---
+
+## Pipeline Overview
+**DAG:** `bookings_etl`  
+**Tasks:** `extract_bookings → transform_bookings → quality_checks → load_to_postgres`  
+**Output table:** `public.fact_bookings`
+
+---
+
+## Quickstart
+
+### 1) Start services
+```bash
+docker compose up -d --build
+```
+### 2) Open Airflow UI
+- URL: http://localhost:8080
+
+- Username: admin
+
+- Password: admin
 
 ### 3) Trigger the DAG
-Trigger `bookings_etl` from the UI.
+Trigger bookings_etl in the Airflow UI.
 
-(Optional CLI)
-```bash
-docker compose exec airflow-webserver airflow dags trigger bookings_etl
-```
 
 ## Verify in Postgres
 
@@ -68,22 +90,3 @@ FROM fact_bookings;"
 ### Airflow List View 
 ![Airflow List View](screenshots/list_view.png)
 
-**DAG:** `bookings_etl`  
-**Tasks:** `extract_bookings -> transform_bookings -> quality_checks -> load_to_postgres`  
-**Output table:** `public.fact_bookings`
-
-Current dataset results:
-- Rows loaded: **119,390**
-- Arrival date range: **2015-07-01** to **2017-08-31**
-- Cancellation rate: **37.04%**
-
-## How to Run
-
-### 1) Start services
-```bash
-docker compose up -d --build
-```
-
-### 2) Open Airflow UI
-- URL: http://localhost:8080  
-- Username: `admi
