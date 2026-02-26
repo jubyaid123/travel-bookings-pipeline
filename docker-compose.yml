@@ -1,5 +1,5 @@
 services:
-  # Airflow metadata database (Airflow uses this internally)
+
   airflow-postgres:
     image: postgres:15
     container_name: airflow-postgres
@@ -16,7 +16,6 @@ services:
       timeout: 5s
       retries: 10
 
-  # Target analytics database for your ETL outputs (this is what you'll query)
   bookings-postgres:
     image: postgres:15
     container_name: bookings-postgres
@@ -50,7 +49,6 @@ services:
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
       - AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION=False
       - PYTHONPATH=/opt/airflow
-      # ETL target DB connection (use this in your ETL code)
       - BOOKINGS_DB_URL=postgresql+psycopg2://bookings:bookings@bookings-postgres:5432/bookings
     volumes:
       - ./dags:/opt/airflow/dags
@@ -79,7 +77,6 @@ services:
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
       - AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION=False
       - PYTHONPATH=/opt/airflow
-      # ETL target DB connection (use this in your ETL code)
       - BOOKINGS_DB_URL=postgresql+psycopg2://bookings:bookings@bookings-postgres:5432/bookings
     volumes:
       - ./dags:/opt/airflow/dags
