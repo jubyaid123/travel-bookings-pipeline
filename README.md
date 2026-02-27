@@ -1,4 +1,4 @@
-# Travel Bookings Pipeline (Airflow + Postgres)
+# Travel Bookings Pipeline
 
 An end-to-end ETL pipeline orchestrated with Apache Airflow and Docker Compose. The DAG extracts raw hotel booking data, transforms and validates it, then loads an analytics-ready fact table into PostgreSQL.
 
